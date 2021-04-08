@@ -1,8 +1,5 @@
-package cn.chatroom;
+package pipeline;
 
-import cn.chatroom.decoder.IntToString;
-import cn.chatroom.encoder.StringToInt;
-import cn.chatroom.inhandler.ServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -38,10 +35,15 @@ public class Server {
                         public void initChannel(SocketChannel ch){
                             ChannelPipeline pipeline = ch.pipeline();
 
-                            pipeline.addLast(new IntToString());
+                            pipeline.addLast(new InHandler1());
+                            pipeline.addLast(new InHandler2());
+                            pipeline.addLast(new InHandler3());
+
                             pipeline.addLast(new ServerHandler());
 
-                            pipeline.addLast(new StringToInt());
+                            pipeline.addLast(new OutHandler1());
+                            pipeline.addLast(new OutHandler2());
+                            pipeline.addLast(new OutHandler3());
                         }
                     });
 

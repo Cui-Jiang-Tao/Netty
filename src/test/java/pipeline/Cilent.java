@@ -1,8 +1,5 @@
-package cn.chatroom;
+package pipeline;
 
-import cn.chatroom.decoder.IntToString;
-import cn.chatroom.encoder.StringToInt;
-import cn.chatroom.inhandler.CilentHandler;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -23,13 +20,7 @@ public class Cilent {
                         @Override
                         protected void initChannel(SocketChannel ch) {
                             ChannelPipeline pipeline = ch.pipeline();
-
-                            pipeline.addLast(new IntToString());
                             pipeline.addLast(new CilentHandler());
-                            pipeline.addLast(new StringToInt());
-
-
-
                         }
                     });
 
